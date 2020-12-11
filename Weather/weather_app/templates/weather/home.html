@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<link rel="stylesheet" href="{% static './css/styles.css'%}" type="text/css" media="screen">
+<title>Weather</title>
+</head>
+<body>
+<header class="header text-left">
+    <h2 class="ml-5 pl-5">What's the weather like? Find out here</h2>
+</header>
+<div class="left"></div>
+<div class="body ">
+    <form method="POST">
+        {% csrf_token%}
+    <!-- <input type="text"  placeholder="enter location here" class="ml-5 pl-5"> <br> -->
+    {{form.name}}
+    <button type="submit" class="btn btn-primary ">Add City</button>
+</form>
+    {% for city_weather in weather_data %}
+    <div class="location ml-5">
+    <i>
+        <img src="http://opeanweathermap.org/img/w/{{ city_weather.icon }}.png" alt="img"> 
+</i>
+        <span>{{ city_weather.city }}</span> <br>
+        <span>{{ city_weather.icon }}</span> <br>
+        <span>{{ city_weather.temperature }} <sup>o</sup>C</span> <br>
+        <span>{{ city_weather.description }}</span>
+     <br>
+  </div>
+  <br>
+    {% endfor%} 
+</div>
+
+{% comment %} {% for i in (0,100)%}:
+    
+    <div class="result" style="width:20px;
+    height:20px; font-style:italic; ">{{i}}</div>
+{% endfor %} {% endcomment %}
+
+{% comment %} {% for i in (0,100)%}
+    {% if  (i % 1000001) == 0%}
+        
+    
+        <div class="result" style="width:20px;
+        height:20px; text-decoration:underline; ">{{i}}</div>
+    {% endif%}
+{% endfor %} {% endcomment %}
+
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
